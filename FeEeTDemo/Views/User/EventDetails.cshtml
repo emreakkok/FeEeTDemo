@@ -1,0 +1,104 @@
+﻿@model EntityLayer.Concrete.Event
+@{
+    ViewData["Title"] = "Event Details";
+    Layout = "~/Views/Shared/_userLayout.cshtml";
+    var currentUserId = (int)ViewData["CurrentUserId"];
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>@Model.Title</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <p><strong>Açıklama:</strong> @Model.Description</p>
+                    <p><strong>Konum:</strong> @Model.Location</p>
+                    <p><strong>Oluşturan:</strong> @Model.CreatedBy.Username</p>
+                    <p><strong>Oluşturulma Tarihi:</strong> @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</p>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h4>Tarih Seçenekleri</h4>
+                @foreach (var option in Model.DateTimeOptions.OrderBy(x => x.DateTime))
+                {
+                    var hasVoted = option.SurveyResponses.Any(sr => sr.UserId == currentUserId);
+                    var voteCount = option.SurveyResponses.Count;
+                    var usersVoted = option.SurveyResponses.Select(sr => sr.User.Username).ToList();
+
+                    <div class="card mb-2">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="mb-0">@option.DateTime.ToString("dd MMMM yyyy, dddd HH:mm")</h5>
+                                <small class="text-muted">@voteCount kişi bu tarihi seçti</small>
+                                @if (usersVoted.Any())
+                                {
+                                    <div>
+                                        <strong>Oy Verenler:</strong>
+                                        <ul class="users-voted-list">
+                                            @foreach (var user in usersVoted)
+                                            {
+                                                <li>@user</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                            </div>
+                            <button class="btn @(hasVoted ? "btn-success" : "btn-outline-primary") vote-button"
+                                    data-option-id="@option.Id">
+                                @(hasVoted ? "Oyunuzu Kaldırın" : "Oy Verin")
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.vote-button').click(function () {
+                var button = $(this);
+                var optionId = button.data('option-id');
+
+                $.ajax({
+                    url: '@Url.Action("SubmitVote", "User")',
+                    type: 'POST',
+                    data: { dateTimeOptionId: optionId },
+                    success: function (response) {
+                        if (response.success) {
+                            // Button durumunu güncelle
+                            if (button.hasClass('btn-outline-primary')) {
+                                button.removeClass('btn-outline-primary').addClass('btn-success');
+                                button.text('Oyunuzu Kaldırın');
+                            } else {
+                                button.removeClass('btn-success').addClass('btn-outline-primary');
+                                button.text('Oy Verin');
+                            }
+
+                            // Oy sayısını güncelle
+                            button.closest('.card-body').find('.text-muted')
+                                .text(response.voteCount + ' kişi bu tarihi seçti');
+
+                            // Oy veren kullanıcıları güncelle
+                            var usersList = button.closest('.card-body').find('.users-voted-list');
+                            usersList.empty();
+                            response.usersVoted.forEach(function (user) {
+                                usersList.append('<li>' + user + '</li>');
+                            });
+                        } else {
+                            alert('Bir hata oluştu: ' + response.message);
+                        }
+                        },
+                            error: function () {
+                                alert('Bir hata oluştu!');
+                            }
+                        });
+                    });
+                });
+    </script>
+}

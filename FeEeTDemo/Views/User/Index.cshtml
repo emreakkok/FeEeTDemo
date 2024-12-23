@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_userLayout.cshtml";
+}
+<style>
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-top: 50px;
+        gap: 20px;
+        min-height: 50vh;
+        padding: 0 40px;
+        flex-wrap: wrap;
+    }
+
+    .profile-content, .steps {
+        background-color: white;
+        width: 48%;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 600px; /* Yüksekliği sabitledik */
+        overflow-y: auto; /* İçeriğin taşmasını engelledik */
+    }
+
+        .profile-content h3, .step h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+    .form-group input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f8f8f8;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .step {
+        width: 100%;
+        padding: 20px;
+        margin-bottom: 30px;
+        text-align: left;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        min-height: 150px;
+    }
+
+        .step img {
+            width: 100px;
+            height: 100px;
+        }
+
+    button.main-btn {
+        padding: 15px 25px;
+        font-size: 18px;
+    }
+
+</style>
+
+<div class="container">
+    <!-- Profil Bilgileri (Sol Taraf) -->
+    <div class="profile-content">
+        <h3>Profilim</h3>
+        <div>
+            <div class="form-group">
+                <label for="UserId">Kullanıcı Id :</label>
+                <input type="text" id="UserId" name="Id" value="@ViewData["UserId"]" disabled />
+            </div>
+            <div class="form-group">
+                <label for="Username">Ad :</label>
+                <input type="text" id="Username" name="Username" value="@ViewData["Username"]" disabled />
+            </div>
+            <div class="form-group">
+                <label for="Email">E-mail:</label>
+                <input type="email" id="Email" name="Email" value="@ViewData["Email"]" disabled />
+            </div>
+            <div class="form-group">
+                <label for="Password">Şifre:</label>
+                <input type="text" id="Password" name="Password" value="**********" disabled />
+            </div>
+            <div class="form-group">
+                <label for="CreatedAt">Hesap Oluşturulma Tarihi :</label>
+                <input type="date" id="CreatedAt" name="CreatedAt" value="@ViewData["CreatedAt"]" disabled />
+            </div>
+        </div>
+    </div>
+
+    <!-- Etkinlik Adımları (Sağ Taraf) -->
+    <div class="steps">
+        <div class="step">
+            <img src="/images/resim1.png" alt="Takvim" />
+            <div>
+                <h3>Tarih ve zamanları seçin</h3>
+                <p>Etkinliğiniz veya toplantınız için birkaç olası tarih seçin. Ayrıca her gün için farklı zaman aralıkları belirtebilirsiniz.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <img src="/images/resim2.png" alt="Davet" />
+            <div>
+                <h3>Katılımcıları davet edin</h3>
+                <p>Katılımcıları, etkinlik anketinize e-posta yoluyla veya doğrudan FeeeT yoluyla davet edin. Kişisel anket sayfanız için bir bağlantı adresi alacaklardır.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <img src="/images/resim3.png" alt="Tablo" />
+            <div>
+                <h3>En uygun tarihi seçin</h3>
+                <p>Katılımcılar uygun tarihlerini bildirir. En uygun tarih kolayca seçilir.</p>
+            </div>
+        </div>
+    </div>
+</div>

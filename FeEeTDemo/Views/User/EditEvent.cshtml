@@ -1,0 +1,122 @@
+﻿@model EntityLayer.Concrete.Event
+@{
+    ViewData["Title"] = "Etkinlik Düzenle";
+    Layout = "~/Views/Shared/_userLayout.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Etkinlik Düzenle</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="EditEvent" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedAt" />
+                <input type="hidden" asp-for="CreatedById" />
+
+                <div class="mb-3">
+                    <label for="Title" class="form-label">Başlık</label>
+                    <input type="text" class="form-control" id="Title" name="Title" value="@Model.Title" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="Description" class="form-label">Açıklama</label>
+                    <textarea class="form-control" id="Description" name="Description" rows="3" required>@Model.Description</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Location" class="form-label">Konum</label>
+                    <input type="text" class="form-control" id="Location" name="Location" value="@Model.Location" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tarih Seçenekleri</label>
+                    <div id="dateOptionsContainer">
+                        @for (var i = 0; i < Model.DateTimeOptions.Count; i++)
+                        {
+                            <div class="input-group mb-2">
+                                <input type="datetime-local" class="form-control"
+                                       name="DateTimeOptions[@i].DateTime"
+                                       value="@Model.DateTimeOptions[i].DateTime.ToString("yyyy-MM-ddTHH:mm")"
+                                       required />
+                                <input type="hidden" name="DateTimeOptions[@i].Id" value="@Model.DateTimeOptions[i].Id" />
+                                <input type="hidden" name="DateTimeOptions[@i].EventId" value="@Model.Id" />
+                                <button type="button" class="btn btn-danger remove-date">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        }
+                    </div>
+                    <button type="button" id="addDateOption" class="btn btn-secondary mt-2">
+                        <i class="fas fa-plus"></i> Yeni Tarih Ekle
+                    </button>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Değişiklikleri Kaydet
+                    </button>
+                    <a href="@Url.Action("EventList")" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Geri Dön
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            let dateOptionIndex = @Model.DateTimeOptions.Count;
+
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                console.log('Form data:', data);
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log('Success:', response);
+                        window.location.href = '@Url.Action("EventList")';
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            // Rest of your existing JavaScript...
+            $('#addDateOption').click(function () {
+                const newDateOption = `
+                            <div class="input-group mb-2">
+                                <input type="datetime-local" class="form-control"
+                                       name="DateTimeOptions[${dateOptionIndex}].DateTime" required />
+                                <input type="hidden" name="DateTimeOptions[${dateOptionIndex}].EventId" value="@Model.Id" />
+                                <button type="button" class="btn btn-danger remove-date">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>`;
+
+                $('#dateOptionsContainer').append(newDateOption);
+                dateOptionIndex++;
+            });
+
+            $(document).on('click', '.remove-date', function () {
+                if ($('#dateOptionsContainer .input-group').length > 1) {
+                    $(this).closest('.input-group').remove();
+                } else {
+                    alert('En az bir tarih seçeneği olmalıdır!');
+                }
+            });
+        });
+    </script>
+}

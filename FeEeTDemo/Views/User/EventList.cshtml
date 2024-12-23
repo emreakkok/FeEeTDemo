@@ -1,0 +1,68 @@
+﻿@model List<EntityLayer.Concrete.Event>
+
+@{
+    ViewData["Title"] = "EventList";
+    Layout = "~/Views/Shared/_userLayout.cshtml";
+}
+
+<div class="container">
+    <h2>Etkinliklerim</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            Konum: @item.Location<br />
+                            Oluşturulma Tarihi: @item.CreatedAt.ToString("dd/MM/yyyy")
+                        </small>
+                    </p>
+                    <a href="@Url.Action("EventDetails", "User", new { id = item.Id })" class="btn btn-primary">
+                        Etkinliğe Git
+                    </a>
+                    <a href="@Url.Action("EditEvent", "User", new { id = item.Id })" class="btn btn-warning" style="margin-left: 10px;">
+                        Düzenle
+                    </a>
+                    <a href="@Url.Action("DeleteEvent", "User", new { id = item.Id })" class="btn btn-danger" style="margin-left: 10px;">
+                        Sil
+                    </a>
+                    <!-- Detaylar Linkini Kopyalama Butonu -->
+                    <button class="btn btn-info" style="margin-left: 10px;" onclick="copyEventLink('@Url.Action("EventDetails", "User", new { id = item.Id })')">
+                        Paylaş
+                    </button>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Henüz hiç etkinliğiniz bulunmamaktadır.</p>
+    }
+</div>
+<script>
+    function copyEventLink(actionUrl) {
+        // Tam URL'yi oluştur
+        var baseUrl = window.location.origin;  // Bu, localhost:5000 veya gerçek domain adresini alır
+        var fullUrl = baseUrl + actionUrl;
+
+        // Geçici bir input elementi oluşturuluyor
+        var tempInput = document.createElement("input");
+        tempInput.value = fullUrl;
+        document.body.appendChild(tempInput);
+
+        // Linki kopyala
+        tempInput.select();
+        document.execCommand("copy");
+
+        // Geçici input elementini kaldır
+        document.body.removeChild(tempInput);
+
+        // Kopyalama işlemi başarılı olduğunda kullanıcıya bilgi verme
+        alert("Bağlantı kopyalandı: " + fullUrl);
+    }
+</script>

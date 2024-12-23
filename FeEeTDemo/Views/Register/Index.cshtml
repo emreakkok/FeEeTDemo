@@ -1,0 +1,111 @@
+﻿@model EntityLayer.Concrete.User
+
+@{
+    ViewData["Title"] = "Kayıt Ol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 150px); /* Navbar ve footer'ı dışarda bırakmak için */
+        padding: -20px;
+        margin-top: -20px; /* Üst boşluk */
+    }
+
+    .register-form {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+    }
+
+        .register-form h2 {
+            text-align: center;
+            color: #272727;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .register-form input {
+            width: 100%;
+            padding: 18px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .register-form .text-danger {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .register-form button {
+            width: 100%;
+            padding: 18px;
+            background-color: #272727;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+            .register-form button:hover {
+                background-color: #171e5e;
+                transition: 0.3s;
+            }
+
+        .register-form .signin-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+            .register-form .signin-link a {
+                color: #272727;
+                text-decoration: none;
+                font-size: 18px;
+            }
+
+                .register-form .signin-link a:hover {
+                    text-decoration: underline;
+                }
+</style>
+<div class="content">
+    <div class="register-form">
+        <h2>Kayıt Ol</h2>
+        @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+        {
+            <div class="mb-3">
+                <label for="Username" class="fw-bold">Kullanıcı Adı</label>
+                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", id = "Username" })
+                @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                <label for="Email" class="fw-bold">E-posta</label>
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", id = "Email" })
+                @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                <label for="Password" class="fw-bold">Şifre</label>
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control", id = "Password" })
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <button type="submit">Kayıt Ol</button>
+        }
+        <div class="signin-link">
+            <p>Hesabınız var mı? <a href="/login/index">Giriş yapın</a></p>
+        </div>
+    </div>
+</div>

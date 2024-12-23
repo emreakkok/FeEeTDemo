@@ -1,0 +1,232 @@
+﻿<style>
+
+
+
+    * {
+
+        margin: 0;
+
+        padding: 0;
+
+        box-sizing: border-box;
+
+    }
+
+
+
+    body {
+
+        font-family: Arial, sans-serif;
+
+    }
+
+
+
+
+
+    .navbar {
+
+        display: flex;
+
+        align-items: center;
+
+        background-color: #272727;
+
+        padding: 10px 20px;
+
+        color: white;
+
+        height: 4.5rem;
+
+        background: linear-gradient(135deg, #0b0d24,
+
+        /* Koyu mavi - gece gökyüzü */
+
+        #171e5e 40%,
+
+        /* Mor tonlar */
+
+        #0f0c29 100%);
+
+        /* Koyu siyah - uzay siyahı */
+
+        /* Navbar öğeleri için ekstra stil */
+
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+
+        /* Hafif gölge efekti */
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        /* Hafif beyaz alt sınır */
+
+    }
+
+
+
+        .navbar .logo {
+
+            display: flex;
+
+            justify-content: left;
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            padding-left: 2.5rem;
+
+        }
+
+
+
+            .navbar .logo a {
+
+                text-decoration: none;
+
+                color: white;
+
+            }
+
+
+
+        /* Navbar menü elemanları */
+
+        .navbar ul {
+
+            margin-top: 1rem;
+
+            list-style: none;
+
+            display: flex;
+
+            flex-direction: row;
+
+            margin-left: 9rem;
+
+            gap: 3rem;
+
+        }
+
+
+
+            .navbar ul li {
+
+                display: inline;
+
+            }
+
+
+
+                .navbar ul li a {
+
+                    text-decoration: none;
+
+                    color: white;
+
+                    font-size: 18px;
+
+                }
+
+
+
+    .gri:hover {
+
+        color: gray;
+
+        transition: 0.5s;
+
+    }
+
+
+
+    /* Navbar sağ taraftaki butonlar */
+
+    .navbar .buttons {
+
+        display: flex;
+
+        margin-left: auto;
+
+        gap: 10px;
+
+        margin-right: 20px;
+
+    }
+
+
+
+
+
+        .navbar .buttons button {
+
+            padding: 10px 25px;
+
+            background-color: transparent;
+
+            border: 1px solid white;
+
+            border-radius: 10px;
+
+            color: white;
+
+            cursor: pointer;
+
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+            box-shadow: 0 5px 15px rgba(17, 20, 17, 0.6), 0 0 10px #4d554d, 0 0 20px #2e382c;
+
+        }
+
+
+
+            .navbar .buttons button:hover {
+
+                color: #11123C;
+
+                background-color: white;
+
+                transition: 0.5s;
+
+            }
+
+
+</style>
+
+
+
+
+
+
+
+<nav class="navbar">
+    <!-- Sol üst köşede site başlığı (logo) -->
+    <div class="logo"><a href="/home">FeEeT</a></div>
+
+    <!-- Menü öğeleri -->
+    <ul>
+        <li><a class="gri" href="/home/#hakkimizda">Hakkımızda</a></li>
+        <li><a class="gri" href="/home/#iletisim">İletişim</a></li>
+    </ul>
+
+    <!-- Sağdaki butonlar -->
+    <div class="buttons">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <!-- Kullanıcı giriş yaptıysa "Oluştur" butonu göster -->
+            <a href="/user/createevent" id="createbtn">
+                <button>Oluştur</button>
+            </a>
+        }
+        else
+        {
+            <!-- Kullanıcı giriş yapmadıysa "Giriş Yap" ve "Kayıt Ol" butonları göster -->
+            <a href="/login/index" id="logbtn">
+                <button>Giriş Yap</button>
+            </a>
+            <a href="/register/index" id="signbtn">
+                <button>Kayıt Ol</button>
+            </a>
+        }
+    </div>
+</nav>

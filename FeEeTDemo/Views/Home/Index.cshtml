@@ -1,0 +1,421 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #kapsayici1 {
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #F8F9FA;
+    }
+
+    .kapsayici1sol {
+        display: flex;
+        flex-direction: column;
+        padding-top: 12rem;
+        padding-bottom: 14rem;
+        padding-left: 12rem;
+        width: 50%;
+    }
+
+        .kapsayici1sol p {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 20px;
+            padding-right: 200px;
+            padding-left: 5px;
+            padding-top: 10px;
+        }
+
+    .kapsayiciinput {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+        .kapsayiciinput button {
+            width: 10%;
+            margin-top: 70px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-radius: 20px;
+            color: #FDFEFE;
+            background-color: #1D5CA2;
+            text-decoration: none;
+            border: 1px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 8px 12px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+            .kapsayiciinput button:hover {
+                color: #fdfefed5;
+                background-color: #2562a7;
+                transition: 0.5s;
+            }
+
+    #kapsayici1text {
+        display: flex;
+        width: 70%;
+        margin-top: 70px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 10px;
+        border-radius: 20px;
+    }
+    /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */ /* */
+
+    .kapsayici1sag {
+        padding-left: 7rem;
+    }
+
+        .kapsayici1sag table {
+            width: 100%;
+            height: 10rem;
+            border-collapse: collapse;
+        }
+
+        .kapsayici1sag th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .kapsayici1sag th {
+            background-color: #f2f2f2;
+        }
+
+        .kapsayici1sag .name-cell {
+            background-color: #e0ecff;
+            font-weight: bold;
+        }
+
+        .kapsayici1sag .red {
+            background-color: #f8d7da;
+        }
+
+            .kapsayici1sag .red:hover {
+                background-color: #f0bec2;
+            }
+
+        .kapsayici1sag .green {
+            background-color: #d4edda;
+        }
+
+            .kapsayici1sag .green:hover {
+                background-color: #b7e9c2;
+            }
+
+        .kapsayici1sag .icon {
+            margin-right: 5px;
+        }
+
+    /*alt kısım*/
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #0056b3;
+    }
+
+    .steps {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 40px;
+    }
+
+    .step {
+        max-width: 380px;
+        flex: 1;
+        margin: 0 15px;
+        padding: 15px;
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .step img {
+            width: 250px;
+            height: 150px;
+        }
+
+        .step h3 {
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 14px;
+            line-height: 2;
+        }
+
+    .container button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        background-color: #0056b3;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .conteiner button:hover {
+        background-color: #003d80;
+    }
+
+    .hakkimizda-container {
+        margin-top: 20px;
+        background-color: #f4f4f4;
+        padding: 50px 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        scroll-margin-top: 100px;
+    }
+
+    .paragraf {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .yazi {
+        max-width: 850px;
+        margin: 0 auto;
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: #34495e;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: justify;
+    }
+
+    #iletisim {
+        padding: 30px;
+        background-color: white;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .iletisim-baslik {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .iletisim-bilgileri {
+        font-size: 1.2rem;
+        line-height: 2;
+        color: #555;
+    }
+
+        .iletisim-bilgileri p {
+            margin: 10px 0;
+        }
+
+        .iletisim-bilgileri strong {
+            color: #007bff;
+        }
+
+    .social-media {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .social-icon i {
+        font-size: 30px;
+        color: #000;
+        transition: color 0.3s;
+    }
+
+    .social-icon:hover i {
+        color: #0073e6;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+</style>
+
+<!--burası sarı uyarı alerti için-->
+<div class="container">
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            @TempData["Message"]
+        </div>
+    }
+</div>
+
+<div id="kapsayici1">
+    <div class="kapsayici1sol">
+        <h1>Toplantılarınızı daha hızlı planlayın...</h1>
+        <p>
+            "Feeet, toplantılarınızı ve etkinliklerinizi hızlıca planlamanızı sağlar.
+            Kaydolun, etkinlik oluşturun ve en uygun zamanı kolayca belirleyin."
+        </p>
+        
+    </div>
+
+    <div class="kapsayici1sag">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>HAZ 20<br />PRŞ</th>
+                    <th>HAZ 27<br />PRŞ</th>
+                    <th>TEM 03<br />ÇRŞ</th>
+                    <th>TEM 04<br />PRŞ</th>
+                    <th>TEM 05<br />CUM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="name-cell"><span class="icon">👤</span>Toprak</td>
+                    <td class="red">❌</td>
+                    <td class="green">✅</td>
+                    <td class="red">❌</td>
+                    <td class="red">❌</td>
+                    <td class="green">✅</td>
+                </tr>
+                <tr>
+                    <td class="name-cell"><span class="icon">👤</span>Emre</td>
+                    <td class="red">❌</td>
+                    <td class="green">✅</td>
+                    <td class="red">❌</td>
+                    <td class="green">✅</td>
+                    <td class="green">✅</td>
+                </tr>
+                <tr>
+                    <td class="name-cell"><span class="icon">👤</span>Emirhan</td>
+                    <td class="red">❌</td>
+                    <td class="green">✅</td>
+                    <td class="red">❌</td>
+                    <td class="green">✅</td>
+                    <td class="red">❌</td>
+                </tr>
+                <tr>
+                    <td class="name-cell"><span class="icon">👤</span>Furkan</td>
+                    <td class="green">✅</td>
+                    <td class="red">❌</td>
+                    <td class="green">✅</td>
+                    <td class="red">❌</td>
+                    <td class="red">❌</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+
+<div class="container">
+    <h1>Etkinliğiniz için herkese uygun olan bir tarih belirleyin.</h1>
+
+    <div class="steps">
+        <div class="step">
+            <img src="/images/resim1.png" alt="Takvim" />
+            <h3>Tarih ve zamanları seçin</h3>
+            <p1>Etkinliğiniz veya toplantınız için birkaç olası tarih seçin. Ayrıca her gün için farklı zaman aralıkları belirtebilirsiniz.</p>
+        </div>
+
+        <div class="step">
+            <img src="/images/resim2.png" alt="Davet" />
+            <h3>Katılımcıları davet edin</h3>
+            <p>Katılımcıları, etkinlik anketinize e-posta yoluyla veya doğrudan FeeeT yoluyla davet edin. Kişisel anket sayfanız için bir bağlantı adresi alacaklardır.</p>
+        </div>
+
+        <div class="step">
+            <img src="/images/resim3.png" alt="Tablo" />
+            <h3>En uygun tarihi seçin</h3>
+            <p>Katılımcılar uygun tarihlerini bildirir. En uygun tarih kolayca seçilir.</p>
+        </div>
+    </div>
+    <div class="buttons">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <!-- Kullanıcı giriş yaptıysa "Oluştur" butonu göster -->
+            <a href="/user/createevent" id="createbtn">
+                <button>Oluştur</button>
+            </a>
+        }
+        else
+        {
+            <a href="/login/index" class="social-icon">
+                <button>Kendi toplantı anketini başlat</button>
+            </a>
+        }
+    </div>
+
+</div>
+
+<div class="hakkimizda-container" id="hakkimizda">
+    <div class="paragraf">
+        <p>Hakkımızda</p>
+    </div>
+    <h3 class="yazi">
+        Teknolojiye olan ilgimiz ve yazılım geliştirme tutkumuz, bizi bir araya getiren en önemli unsurlar oldu. Hedefimiz, kullanıcıların etkinlik ve toplantı planlamalarını kolaylaştırarak zamandan tasarruf etmelerini sağlamak amacıyla etkili ve kullanıcı dostu bir çözüm sunmaktır.
+
+        Projemiz, modern yazılım geliştirme yaklaşımlarını ve kullanıcı odaklı tasarım prensiplerini bir araya getirerek inşa edildi. Her adımda; kullanıcı ihtiyaçlarını önceliklendiriyor, detaylara önem veriyor ve kaliteli bir deneyim sunmayı hedefliyoruz.
+
+        Ekibimiz, HTML, CSS, JavaScript gibi teknolojilerde yetkinliğe sahip ve sürekli olarak kendini geliştiren bir grup teknoloji tutkunu. Kodlama, öğrenme ve yaratıcı çözümler üretme konularındaki kararlılığımız, projelerimize olan bağlılığımızı güçlendiriyor.
+
+        Bu platform, sadece bir yazılım ürünü değil; aynı zamanda kullanıcıların hayatını kolaylaştırmaya yönelik bir vizyonun somutlaşmış halidir. Amacımız, kullanıcılarımızın ihtiyaçlarına en iyi şekilde cevap vermek ve onlara değer katmaktır.
+
+        Yenilik, kalite ve kullanıcı memnuniyeti konusundaki hassasiyetimizle, daha iyisini üretmek için sürekli çalışıyoruz. Sizlerden gelen geri bildirimler ve destekler, bizim için yol gösterici oluyor.
+    </h3>
+</div>
+
+
+<section id="iletisim" style="margin-top: 50px;">
+    <h2 class="iletisim-baslik">İletişim</h2>
+    <div class="iletisim-bilgileri">
+        <p><strong>📞 Telefon:</strong> +90 555 123 45 67</p>
+        <p><strong>✉️ E-posta:</strong> feeet@proje.com</p>
+        <p><strong>📍 Adres:</strong> İstanbul, Türkiye</p>
+        <p><strong>🌐 Web:</strong> www.feeet.com</p>
+    </div>
+    <div class="social-media">
+        <a href="https://linkedin.com" class="social-icon" target="_blank">
+            <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://facebook.com" class="social-icon" target="_blank">
+            <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://twitter.com" class="social-icon" target="_blank">
+            <i class="bi bi-twitter-x"></i>
+        </a>
+        <a href="https://instagram.com" class="social-icon" target="_blank">
+            <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://youtube.com" class="social-icon" target="_blank">
+            <i class="bi bi-youtube"></i>
+        </a>
+    </div>
+</section>
+<script src="js/navbtn.js"></script>
